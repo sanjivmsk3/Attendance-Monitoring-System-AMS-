@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-3">
+            <h2 class="card-title text-center">Report of <b>{{ users.username }}</b></h2>
+            <div class="card-body">
+                 <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Total Work Time</th>
+                    </tr>
+                    {% for foo in clock %}
+                        <tr>
+                            <td>{{ foo.id }}</td>
+                            <td>{{ foo.clock_in|date }}</td>
+                            <td>{{ foo.total_hour }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

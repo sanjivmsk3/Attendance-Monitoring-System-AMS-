@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-3">
+        <h4 class="text-center">Welcome to Attendance Monitoring System (AMS) in our organization</h4>
+
+        <div class="card">
+            <div class="card-body">
+                {% if clockouting %}
+                    <h1>The workday is complete</h1>
+                    <div class="card-footer">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                        <th>Break Period</th>
+                        <th>Total Work Time</th>
+                    </tr>
+                    {% for foo in clock %}
+                        <tr>
+                        <td>{{ foo.id }}</td>
+                        <td>{{ foo.user.username }}</td>
+                        <td>{{ foo.clock_in }}</td>
+                        <td>{{ foo.clock_out }}</td>
+                        <td>13:00 - 14:00</td>
+                        <td>{{ foo.total_hour }}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+                 {% elif clocking %}
+                    <form action="{% url 'clockout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-success" value="Clock Out">
+                    </form>
+                 {% else %}
+                    <form action="{% url 'clockin' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-success" value="Clock In">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

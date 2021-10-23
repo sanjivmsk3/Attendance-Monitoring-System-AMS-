@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-5">
+            <h2 class="card-title text-center">All Employee</h2>
+            <div class="card-body">
+                <table class="table hover">
+                    <tr>
+                        <th>Emp. ID</th>
+                        <th>Emp. Username</th>
+                        <th>Emp. Email</th>
+                        <th>Report Generate</th>
+                    </tr>
+                    {% for foo in allEmp %}
+                        <tr>
+                            <td>{{ foo.id }}</td>
+                            <td>{{ foo.username }}</td>
+                            <td>{{ foo.email }}</td>
+                            <td><a href="{% url 'report' foo.id %}" class="btn btn-success btn-sm">Generate</a></td>
+                        </tr>
+                    {% endfor %}
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
